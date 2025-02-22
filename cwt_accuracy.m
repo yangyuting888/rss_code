@@ -4,8 +4,6 @@ close all;
 Fn=200;
 windowsize=200;
 set_mw=0.1;
-
-
 [~,~,~,rssis]=load_data("D:\code\rssi\rss_data\cwt\CWT_DATA\static.dat");
 csi_trace=read_bf_file("D:\code\rssi\rss_data\cwt\CWT_DATA\static.dat");
 agc=zeros(1,size(csi_trace,2));
@@ -16,9 +14,6 @@ rssi_mag=0;
 rssi_mag = rssi_mag + dbinv(rssis(:,1).');
 rss = db(rssi_mag, 'pow') - 44 - agc;
 RSS0=rss(Fn+1:9*Fn);
-
-
-
 RSS1_ALL=files('D:\code\rssi\rss_data\cwt\CWT_DATA\1\*.dat');
 RSS2_ALL=files('D:\code\rssi\rss_data\cwt\CWT_DATA\2\*.dat');
 RSS3_ALL=files('D:\code\rssi\rss_data\cwt\CWT_DATA\3\*.dat');
@@ -202,15 +197,15 @@ for zz=1:size(RSSall,2)
    
 
 end
-test=flip(zzz,2);
-boxplot(test(:,2:end));
+
+boxplot(zzz(:,1:end-1));
 hold on
 %therods=ones(1,9)*var_detail0;
 therods=ones(1,9)*var_detail0_n';
 plot(therods,'r--')
 xlabel('Distance(m)');
 ylabel('Detail coefficient var');
-xticklabels({'9','8','7','6','5','4','3','2','1'});  % 然后设置刻度标签为递减的
+xticklabels({'1','2','3','4','5','6','7','8','9'}); 
 set(gcf, 'Color', 'white');
 set(gca, 'Color', 'white');
 
